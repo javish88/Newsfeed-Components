@@ -85,6 +85,40 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Professional Pokemon Trainer',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `I wanna be the very best
+    Like no one ever was
+    To catch them is my real test
+    To train them is my cause
+    I will travel across the land
+    Searching far and wide
+    Teach Pokémon to understand
+    The power that's inside
+    `,
+
+    secondParagraph: `[Chorus]
+    (Pokémon, gotta catch 'em all) It's you and me
+    I know it's my destiny
+    (Pokémon) Oh, you're my best friend
+    In a world we must defend
+    (Pokémon, gotta catch 'em all) A heart so true
+    Our courage will pull us through
+    You teach me and I'll teach you
+    Pokémon! (Gotta catch 'em all) Gotta catch 'em all`,
+
+    thirdParagraph: `Every challenge along the way
+    With courage I will face
+    I will battle every day
+    To claim my rightful place
+    Come with me, the time is right
+    There's no better team
+    Arm in arm we'll win the fight
+    It's always been our dream
+    `
+
   }
 ];
 
@@ -112,3 +146,68 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+// Grabbing container so we can append the card compnent to it
+
+const container = document.querySelector('.articles');
+
+// looping through the data to create multiple articles hope it works 
+
+data.forEach(info => {
+ container.appendChild(createArticle(info.title, info.date, info.firstParagraph, info.secondParagraph, info.thirdParagraph))
+})
+
+// Function Created
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+    // defining new elements 
+      const articleMain = document.createElement('div');
+      const articleH2 = document.createElement('h2');
+      const articleDate1 = document.createElement('p');
+      const articleDate2 = document.createElement('p');
+      const articleDate3= document.createElement('p');
+      const articleDate4 = document.createElement('p');
+      const spanButtonContainer = document.createElement('span');
+      const spanButtonOpen = document.createElement('button');
+      const spanButtonClose = document.createElement('button');
+
+      // SetUp Structure of Elements 
+      articleMain.appendChild(articleH2);
+      articleMain.appendChild(articleDate1);
+      articleMain.appendChild(articleDate2);
+      articleMain.appendChild(articleDate3);
+      articleMain.appendChild(articleDate4);
+      articleMain.appendChild(spanButtonContainer);
+      spanButtonContainer.appendChild(spanButtonOpen);
+      spanButtonContainer.appendChild(spanButtonClose);
+
+      // Set Class Names
+      articleMain.classList.add('article');
+      articleH2.classList.add('h2');
+      //articleDate.classList.add('date');
+      spanButtonContainer.classList.add('expandButton');
+      spanButtonOpen.classList.add('span-btn-open');
+      spanButtonClose.classList.add('span-btn-close', 'hide-btn');
+
+      
+
+      //Settting Text Content 
+      articleH2.textContent = title
+      articleDate1.textContent = date
+      articleDate2.textContent = firstParagraph
+      articleDate3.textContent = secondParagraph
+      articleDate4.textContent = thirdParagraph
+      spanButtonOpen.textContent = '\u25bc';
+      spanButtonClose.textContent = '\u25b2';
+
+      // button events
+      spanButtonContainer.addEventListener('click', () => {
+        articleMain.classList.toggle('article-open');
+        spanButtonOpen.classList.toggle('hide-btn');
+        spanButtonClose.classList.toggle('hide-btn');
+      
+        
+
+      })
+
+  return articleMain
+}
